@@ -38,7 +38,7 @@
 <audio id="sonidoRojo" src="Pluh (sound effect).mp3"></audio>
 
   <!-- Este abre un video emergente -->
-  <img src="azulado.png" class="img-slider astro3" onclick="abrirVideo('invitacion.mp4')" />
+<img src="azulado.png" class="img-slider astro3" onclick="mostrarImagenModal()" />
 
   <!-- Este reproduce otro sonido -->
   <img src="jessePinkman.png" class="img-slider astro4" onclick="abrirVideo('RamDance.mp4')"  />
@@ -69,6 +69,12 @@
   Tu navegador no soporta audio HTML5.
 </audio>
 
+<div id="imagenModal" class="modal">
+  <div class="modal-content">
+    <span id="cerrarImagenModal">&times;</span>
+    <img id="imagenModalContenido" src="among2.jpeg" alt="Imagen especial" />
+  </div>
+</div>
   
 <script>
 function irAPagina(url) {
@@ -162,10 +168,33 @@ function interaccionRojo() {
 }
 
 
+function mostrarImagenModal() {
+  const modal = document.getElementById("imagenModal");
+  if (modal) {
+    modal.style.display = "block";
+  }
+}
+
+const cerrarImagenBtn = document.getElementById("cerrarImagenModal");
+const imagenModal = document.getElementById("imagenModal");
+
+cerrarImagenBtn.addEventListener("click", () => {
+  if (imagenModal) {
+    imagenModal.style.display = "none";
+  }
+});
+
+// Cerrar también al hacer clic fuera de la imagen
+window.addEventListener("click", (event) => {
+  if (event.target === imagenModal) {
+    imagenModal.style.display = "none";
+  }
+});
+
+
 </script>
 
 
 
 </body>
 </html>
-
