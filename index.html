@@ -26,10 +26,16 @@
 
   <div class="slider">
   <!-- Este abre una nueva página -->
+
+
   <img src="amarillista.png" class="img-slider astro1" onclick="irAPagina('https://www.youtube.com/watch?v=6N6Y18_h8gs&t=12s')" />
 
-  <!-- Este reproduce un efecto de sonido -->
-  <img src="rojazo.png" class="img-slider astro2" onclick="reproducirSonido('pop1')" />
+  <!-- Astronauta que reproduce un sonido personalizado -->
+<img src="rojazo.png" class="img-slider astro2" onclick="interaccionRojo()" />
+
+
+<!-- Audio oculto que se reproduce al hacer clic -->
+<audio id="sonidoRojo" src="Pluh (sound effect).mp3"></audio>
 
   <!-- Este abre un video emergente -->
   <img src="azulado.png" class="img-slider astro3" onclick="abrirVideo('invitacion.mp4')" />
@@ -38,12 +44,16 @@
   <img src="jessePinkman.png" class="img-slider astro4" onclick="reproducirSonido('pop2')" />
 
   <!-- Este abre otra página también -->
-  <img src="MrWhite.png" class="img-slider astro5" onclick="irAPagina('pagina2.html')" />
+  <img src="MrWhite.png" class="img-slider astro5" onclick="irAPagina('https://www.upslp.edu.mx/upslp/?page_id=16569')" />
 </div>
 
 <!-- Audios escondidos -->
 <audio id="pop1" src="pop1.mp3"></audio>
 <audio id="pop2" src="pop2.mp3"></audio>
+
+<div id="imagenEmergente" class="emergente oculto">
+  <img src="JacobMax.jpeg" alt="Emergente">
+</div>
 
 <!-- Video modal oculto -->
 <div id="videoModal" class="modal">
@@ -61,9 +71,10 @@
 
   
 <script>
-  function irAPagina(url) {
-    window.location.href = url;
-  }
+function irAPagina(url) {
+  window.open(url, "_blank"); // abre en nueva pestaña
+}
+
 
   // Música de fondo y pantalla de bienvenida
   const musica = document.getElementById("musica-fondo");
@@ -127,6 +138,30 @@
       cerrarBtn.click(); // Simula click en cerrar
     }
   });
+
+function interaccionRojo() {
+ 
+
+  const imagen = document.getElementById("imagenEmergente");
+  if (!imagen) return;
+
+  imagen.classList.remove("oculto", "fade-out");
+  imagen.style.display = "block";
+
+  // Después de 2 segundos, inicia el fade-out
+  setTimeout(() => {
+    imagen.classList.add("fade-out");
+  }, 2000);
+
+  // Después de 3 segundos (2s de espera + 1s de transición) la oculta por completo
+  setTimeout(() => {
+    imagen.classList.add("oculto");
+    imagen.style.display = "none";
+  }, 3000);
+   reproducirSonido('sonidoRojo');
+}
+
+
 </script>
 
 
