@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Astronautas flotando</title>
+  <link rel="stylesheet" href="estilosAmong.css" />
+</head>
+<body>
+
+    <!-- Pantalla de bienvenida -->
+<div id="pantalla-bienvenida">
+  <div class="mensaje">
+    <h1>¡ATENCIÓN!</h1>
+    <p>Toca a los tripulantes para interactuar.</p>
+    <p>Haz click en cualquier lado para continuar.</p>
+  </div>
+</div>
+
+
+  <!-- Video de fondo -->
+  <video autoplay muted loop id="fondo-video">
+    <source src="spacebg.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <div class="slider">
+  <!-- Este abre una nueva página -->
+  <img src="amarillista.png" class="img-slider astro1" onclick="irAPagina('https://www.youtube.com/watch?v=6N6Y18_h8gs&t=12s')" />
+
+  <!-- Este reproduce un efecto de sonido -->
+  <img src="rojazo.png" class="img-slider astro2" onclick="reproducirSonido('pop1')" />
+
+  <!-- Este abre un video emergente -->
+  <img src="azulado.png" class="img-slider astro3" onclick="abrirVideo('invitacion.mp4')" />
+
+  <!-- Este reproduce otro sonido -->
+  <img src="jessePinkman.png" class="img-slider astro4" onclick="reproducirSonido('pop2')" />
+
+  <!-- Este abre otra página también -->
+  <img src="MrWhite.png" class="img-slider astro5" onclick="irAPagina('pagina2.html')" />
+</div>
+
+<!-- Audios escondidos -->
+<audio id="pop1" src="pop1.mp3"></audio>
+<audio id="pop2" src="pop2.mp3"></audio>
+
+<!-- Video modal oculto -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <span id="cerrarModal">&times;</span>
+    <video id="videoReproductor" controls autoplay></video>
+  </div>
+</div>
+
+
+<audio id="musica-fondo" loop>
+  <source src="Among Us Drip Theme Song Original (Among Us Trap Remix  Amogus Meme Music).mp3" type="audio/mpeg" />
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+  
+<script>
+  function irAPagina(url) {
+    window.location.href = url;
+  }
+
+  // Música de fondo y pantalla de bienvenida
+  const musica = document.getElementById("musica-fondo");
+  const pantalla = document.getElementById("pantalla-bienvenida");
+
+  const iniciarTodo = () => {
+    musica.play().catch((e) => {
+      console.log("Autoplay bloqueado");
+    });
+
+    if (pantalla) {
+      pantalla.classList.add("fade-out");
+      setTimeout(() => pantalla.remove(), 1000);
+    }
+
+    document.removeEventListener("click", iniciarTodo);
+  };
+
+  document.addEventListener("click", iniciarTodo);
+
+  // Reproducir efecto de sonido
+  function reproducirSonido(id) {
+    const sonido = document.getElementById(id);
+    if (sonido) {
+      sonido.currentTime = 0;
+      sonido.play();
+    }
+  }
+
+  // Abrir video en modal y pausar música de fondo
+  function abrirVideo(ruta) {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("videoReproductor");
+
+    if (modal && video) {
+      musica.pause(); // Pausar música
+      video.src = ruta;
+      modal.style.display = "block";
+      video.play();
+    }
+  }
+
+  // Cerrar el video modal y reanudar música
+  const cerrarBtn = document.getElementById("cerrarModal");
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("videoReproductor");
+
+  cerrarBtn.addEventListener("click", () => {
+    if (modal && video) {
+      video.pause();
+      video.currentTime = 0;
+      video.src = "";
+      modal.style.display = "none";
+      musica.play(); // Reanudar música
+    }
+  });
+
+  // Cerrar el modal también si haces click fuera del video
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      cerrarBtn.click(); // Simula click en cerrar
+    }
+  });
+</script>
+
+
+
+</body>
+</html>

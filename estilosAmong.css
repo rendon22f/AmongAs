@@ -1,0 +1,158 @@
+/* Estilos generales */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Video de fondo */
+#fondo-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Contenedor de astronautas flotando */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilo general de las imágenes */
+.img-slider {
+  position: absolute;
+  width: 120px;
+  cursor: pointer;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Rotación continua */
+@keyframes rotar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Movimiento de derecha a izquierda */
+@keyframes volar-izquierda {
+  from { left: 100vw; }
+  to   { left: -150px; }
+}
+
+/* Movimiento de izquierda a derecha */
+@keyframes volar-derecha {
+  from { left: -150px; }
+  to   { left: 100vw; }
+}
+
+/* Astronautas individuales con distintas alturas, velocidades y direcciones */
+.astro1 {
+  top: 10%;
+  animation-name: volar-izquierda, rotar;
+  animation-duration: 25s, 12s;
+}
+
+.astro2 {
+  top: 30%;
+  animation-name: volar-derecha, rotar;
+  animation-duration: 28s, 14s;
+}
+
+.astro3 {
+  top: 50%;
+  animation-name: volar-izquierda, rotar;
+  animation-duration: 20s, 10s;
+}
+
+.astro4 {
+  top: 70%;
+  animation-name: volar-derecha, rotar;
+  animation-duration: 24s, 16s;
+}
+
+.astro5 {
+  top: 85%;
+  animation-name: volar-izquierda, rotar;
+  animation-duration: 22s, 14s;
+}
+
+/* Efecto al pasar el mouse */
+.img-slider:hover {
+  transform: scale(1.2);
+  z-index: 1;
+}
+
+/* Pantalla de bienvenida */
+#pantalla-bienvenida {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* negro semitransparente */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-family: sans-serif;
+  padding: 20px;
+  transition: opacity 1s ease;
+}
+
+#pantalla-bienvenida.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+h1{
+    color: red;
+}
+
+/* Estilos del modal de video */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9998;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  position: relative;
+  margin: 5% auto;
+  padding: 0;
+  width: 80%;
+  max-width: 800px;
+  background: black;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #fff;
+}
+
+.modal-content video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+#cerrarModal {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
